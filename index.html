@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ShakeTorch</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#121212">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="logo">
+        <div class="pulse-ring"></div>
+        <h1>ShakeTorch</h1>
+      </div>
+      <div class="service-status">
+        <span id="status-dot" class="status-dot stopped"></span>
+        <span id="status-text">Stopped</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="card main-control">
+        <div class="control-header">
+          <h2>Shake Detection</h2>
+          <label class="switch">
+            <input type="checkbox" id="toggle-service">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description">Run background service to detect shakes.</p>
+      </section>
+
+      <section class="card">
+        <h3>Configuration</h3>
+        
+        <div class="setting-item">
+          <div class="setting-text">
+            <label>Sensitivity</label>
+            <span>Force required to trigger</span>
+          </div>
+          <div class="segmented-control" id="sensitivity-control">
+            <button class="segment" data-value="LOW">LOW</button>
+            <button class="segment active" data-value="MEDIUM">MED</button>
+            <button class="segment" data-value="HIGH">HIGH</button>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-text">
+            <label>Torch on Shake</label>
+            <span>Toggle flashlight</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-torch" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-text">
+            <label>Lock on Shake</label>
+            <span>Lock phone when screen is ON</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-lock">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="card capabilities">
+        <h3>Device Capabilities</h3>
+        <ul class="capability-list">
+          <li id="cap-sensors">
+            <span class="cap-icon">⚙️</span>
+            <div class="cap-details">
+              <span class="cap-title">Sensors (Acc/Gyro)</span>
+              <span class="cap-status pending">Checking...</span>
+            </div>
+          </li>
+          <li id="cap-torch">
+            <span class="cap-icon">🔦</span>
+            <div class="cap-details">
+              <span class="cap-title">Flashlight</span>
+              <span class="cap-status pending">Checking...</span>
+            </div>
+          </li>
+          <li id="cap-lock">
+            <span class="cap-icon">🔒</span>
+            <div class="cap-details">
+              <span class="cap-title">Device Lock Admin</span>
+              <span class="cap-status pending">Checking...</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card diagnostics" id="diagnostic-panel" style="display: none;">
+        <h3>Diagnostic Mode</h3>
+        <ul class="capability-list">
+          <li>
+            <div class="cap-details">
+              <span class="cap-title">Acceleration Gate</span>
+              <span class="cap-status" id="diag-accel">IDLE</span>
+            </div>
+          </li>
+          <li>
+            <div class="cap-details">
+              <span class="cap-title">Gyroscope Gate</span>
+              <span class="cap-status" id="diag-gyro">IDLE</span>
+            </div>
+          </li>
+          <li>
+            <div class="cap-details">
+              <span class="cap-title">Shake</span>
+              <span class="cap-status" id="diag-shake">NO</span>
+            </div>
+          </li>
+          <li>
+            <div class="cap-details">
+              <span class="cap-title">Torch</span>
+              <span class="cap-status" id="diag-torch">OFF</span>
+            </div>
+          </li>
+          <li>
+            <div class="cap-details">
+              <span class="cap-title">Cooldown</span>
+              <span class="cap-status" id="diag-cooldown">READY</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  
+  <script src="js/nativeBridge.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
