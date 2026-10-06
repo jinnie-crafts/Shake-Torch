@@ -7,7 +7,9 @@ const ASSETS_TO_CACHE = [
   './js/settings.js',
   './js/nativeBridge.js',
   './js/ui.js',
-  './manifest.webmanifest'
+  './manifest.webmanifest',
+  './assets/icon-192.png',
+  './assets/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -33,6 +35,7 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
   event.respondWith(
     caches.match(event.request)
       .then(response => {
